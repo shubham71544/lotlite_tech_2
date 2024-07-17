@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/static/crm/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="/static/crm/css/dataTables.bootstrap5.min.css" />
+  <link rel="stylesheet" href="/static/crm/css/style.css" />
+  <title>Admin Dashboard</title>
+</head>
+
+<body>
+  {% include "navbar_crm.html" %}
+  <main class="mt-5 pt-3">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <h4>Add Courses</h4>
+        </div>
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              Courses Details
+            </div>
+            <div class="card-body">
+              <form action="/courses_crm/addcoursesData" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label fw-bold">Upload Photo</label>
+                  <div class="col-sm-4">
+                    <input type="file" class="form-control" name="image" />
+                  </div>
+                  <label class="col-sm-2 col-form-label fw-bold">Title</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" required="" name="title" />
+                  </div>
+                </div>
+                <div id="title-headings-container">
+                  <div class="row mb-3 title-heading-group">
+                    <label class="col-sm-2 col-form-label fw-bold">Title Heading</label>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control" required="" name="title_headings[]" />
+                    </div>
+                    <label class="col-sm-2 col-form-label fw-bold">Title Heading Detail</label>
+                    <div class="col-sm-4">
+                      <textarea class="form-control" rows="3" required="" name="title_heading_details[]"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-sm-12 text-center">
+                    <button type="button" class="btn btn-secondary" onclick="addTitleHeading()">Add Another Heading</button>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label fw-bold">Description</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" rows="3" required="" name="desc"></textarea>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label fw-bold">What You Learn</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" rows="3" required="" name="what_you_learn"></textarea>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label fw-bold">Courses Included</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" rows="3" required="" name="courses_include"></textarea>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label fw-bold">Course Contents</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" rows="3" required="" name="course_contents"></textarea>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label fw-bold">Detailed Description</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" rows="3" required="" name="detailed_desc"></textarea>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-sm-12 text-center">
+                    <button type="submit" name="admin-add" class="btn btn-primary">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 mb-3">
+            <div class="card">
+              <div class="card-header">
+                <span><i class="bi bi-table me-2"></i></span> Courses Data Table
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table id="example" class="table data-table table-bordered table-hover" style="width: 100%">
+                    <thead class="bg-dark text-white">
+                      <tr>
+                        <th>Sr No</th>
+                        <th>Image</th>
+                        <th>Title</th>
+                        <th>Title Headings</th>
+                        <th>Title Heading Details</th>
+                        <th>Description</th>
+                        <th>What_you_learn</th>
+                        <th>Courses Included</th>
+                        <th>Course Contents</th>
+                        <th>Detailed Description</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for c in courses %}
+<tr>
+  <td>{{ forloop.counter }}</td>
+  <td><img src="{{ c.image.url }}" class="card-img-top" alt="..."></td>
+  <td>{{ c.title }}</td>
+  <td>
+    {% for heading in c.title_headings.all %}
+      <p>{{ heading }}</p>
+    {% endfor %}
+  </td>
+  <td>
+    {% for detail in c.title_heading_details.all %}
+      <p>{{ detail }}</p>
+    {% endfor %}
+  </td>
+  <td>{{ c.description }}</td>
+  <td>{{ c.what_you_learn }}</td>
+  <td>{{ c.courses_include }}</td>
+  <td>{{ c.course_contents }}</td>
+  <td>{{ c.detailed_description }}</td>
+  <td class="action-buttons">
+    <form method="POST" action="{% url 'delete_course' c.id %}" style="display:inline;">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+  </td>
+</tr>
+{% endfor %}
+                    </tbody>
+                    <tfoot class="bg-dark text-white">
+                      <tr>
+                        <th>Sr No</th>
+                        <th>Image</th>
+                        <th>Title</th>
+                        <th>Title Headings</th>
+                        <th>Title Heading Details</th>
+                        <th>Description</th>
+                        <th>What_you_learn</th>
+                        <th>Courses Included</th>
+                        <th>Course Contents</th>
+                        <th>Detailed Description</th>
+                        <th>Action</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+ 
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+  <script src="/static/crm/js/jquery-3.5.1.js"></script>
+  <script src="/static/crm/js/jquery.dataTables.min.js"></script>
+  <script src="/static/crm/js/dataTables.bootstrap5.min.js"></script>
+  <script src="/static/crm/js/script.js"></script>
+  <script>
+    $(document).ready(function() {
+        {% if messages %}
+            {% for message in messages %}
+                alert("{{ message }}");
+            {% endfor %}
+        {% endif %}
+    });
+  </script>
+    <script>
+      function addTitleHeading() {
+        const container = document.getElementById('title-headings-container');
+        const index = container.children.length;
+      
+        const row = document.createElement('div');
+        row.className = 'row mb-3 title-heading-group';
+      
+        row.innerHTML = `
+          <label class="col-sm-2 col-form-label fw-bold">Title Heading</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" required name="title_headings[]" />
+          </div>
+          <label class="col-sm-2 col-form-label fw-bold">Title Heading Detail</label>
+          <div class="col-sm-4">
+            <textarea class="form-control" rows="3" required name="title_heading_details[]"></textarea>
+          </div>
+        `;
+      
+        container.appendChild(row);
+      }
+      </script>
+      
+  
+</body>
+
+</html>

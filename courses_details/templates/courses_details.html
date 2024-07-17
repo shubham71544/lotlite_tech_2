@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>Lotlite Technology - IT solutions & Services || Job Description</title>
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Flaticon -->
+    <link rel="stylesheet" href="/static/css/flaticon.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/static/css/fontawesome-5.14.0.min.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <!-- Main Style -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        .job-heading {
+            color: blue;
+            margin-top: 20px;
+        }
+        .job-description {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        .form-section {
+            margin-top: 20px;
+            position: -webkit-sticky; /* For Safari */
+            position: sticky;
+            top: 20px;
+            
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .submit-btn {
+            margin-top: 20px;
+        }
+        /* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.course-content {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+
+.section {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.section-header {
+    background-color: #0073e6;
+    color: white;
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease, padding 0.3s ease;
+    border-radius: 8px;
+}
+
+.section-header:hover {
+    background-color: #005bb5;
+    padding: 15px 25px;
+}
+
+.section-content {
+    display: none;
+    padding: 15px;
+    border-top: 1px solid #ddd;
+    animation: fadeIn 0.3s ease;
+}
+
+.section-content p {
+    margin: 0;
+    padding: 5px 0;
+}
+
+.arrow {
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.section.active .arrow {
+    transform: rotate(180deg);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+    <!-- Preloader -->
+    <div class="preloader"><div class="custom-loader"></div></div>
+
+    <!-- main header -->
+    {% include "header.html" %}
+
+    <div class="container">
+        <div class="row">
+            <!-- Job Description -->
+            <div class="job-description col-md-9 col-12 mb-4">
+                <img src="{{course.image.url}}" alt="">
+                <h1 class="job-heading text-left">{{ course.title }}</h1>
+                <h3>Courses Description</h3>
+                <p>{{ course.description }}</p>
+                <h3>What You Learn</h3>
+                <p>{{ course.what_you_learn }}</p>
+                <h4>Courses Included</h4>
+                <p>{{course.courses_included}}</p>
+                <h4>Course Contents</h4>
+                <p>{{course.course_contents}}</p>
+                <div id="course-contents">
+                    {% for heading in headings %}
+                        <div class="section">
+                            <button class="section-header"><span class="arrow">&#9660;</span> {{ heading.heading }}</button>
+                            <div class="section-content">
+                                {% for detail in heading.details.all %}
+                                    <p>{{ detail.detail }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <h4>Detailed Description</h4>
+                <p>{{course.description}}</p>
+                <h4>Lotlite Technology at a glance</h4>
+                <p>Team of &gt;10-99 people</p>
+                <p>Located in Pune, Maharastra, India</p>
+                <h4>About Lotlite Technology</h4>
+                <p>Lotlite Technology is focused on quickly empowering IT professionals and organizations with leveraging Cloud, Big Data & IoT. Founded by Bhavesh Goswami, an ex-Amazonian who was part of the AWS product development team, he brings in vast experience in IT Training and Consulting business which allows us to deliver high quality consulting services with best industry practices. Till date we have trained more than 400K+ IT professionals and conducted corporate training for some of the fortune 500 companies which include Accenture, Infosys, Fidelity, HCL, Intuit, GE, TCS, HP, SAP, Oracle, Western Union, Philips, Flipkart, L&T and Samsung, just to name a few. We have provided consulting in Cloud, AI/ML, DevOps, Big Data, and IoT to fortune 500 companies and startups alike.</p>
+            </div>
+
+            <!-- Application Form -->
+            <div class="form-section col-md-3 col-12">
+                <h3 class="text-center">Apply for this Courses</h3>
+
+                {% if messages %}
+                <div class="alert alert-success">
+                    {% for message in messages %}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <form id="contactForm" class="contactForm" action="/enroll_Data/" name="contactForm" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" class="form-control" value="" placeholder="Full name" required data-error="Please enter your name">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="phone_number" name="phone_number" class="form-control" value="" placeholder="Phone Number" required data-error="Please enter your Phone Number">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" class="form-control" value="" placeholder="Email Address" required data-error="Please enter your Email">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="courses" name="courses" class="form-control" value="{{ course.title }}" placeholder="Subject" data-error="Please enter your Subject"  readonly>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" id="message" class="form-control" rows="3" placeholder="Message" required data-error="Please enter your Message"></textarea>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group text-center mb-0">
+                        <button type="submit" class="theme-btn style-two">send message <i class="far fa-long-arrow-right"></i></button>
+                        <div id="msgSubmit" class="hidden"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% include "footer.html" %}
+
+    <!-- Scroll Top Button -->
+    <button class="scroll-top scroll-to-target" data-target="html"><span class="fas fa-angle-double-up"></span></button>
+</div>
+
+<!-- Jquery -->
+<script src="/static/js/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap -->
+<script src="/static/js/bootstrap.min.js"></script>
+<!-- Custom script -->
+<script src="/static/js/script.js"></script>
+<script>
+    // script.js
+
+document.addEventListener('DOMContentLoaded', () => {
+    const sectionHeaders = document.querySelectorAll('.section-header');
+
+    sectionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const section = header.parentElement;
+            const sectionContent = header.nextElementSibling;
+            
+            sectionContent.style.display = sectionContent.style.display === 'block' ? 'none' : 'block';
+            section.classList.toggle('active');
+        });
+    });
+});
+
+</script>
+
+
+</body>
+</html>

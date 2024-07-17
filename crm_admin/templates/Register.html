@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/admin_crm/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/admin_crm/css/all.css" />
+    <link rel="stylesheet" href="/static/admin_crm/css/style.css" />
+
+    <title>website development</title>
+  </head>
+  <body class="bg-light">
+    <div class="container">
+      <div class="row mt-5">
+        <div class="col-lg-4 bg-white m-auto rounded-top wrapper">
+          <h2 class="text-center pt-3">Register Here</h2>
+          <p class="text-center text-muted lead mb-3">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Consequuntur, cumque.
+          </p>
+          <!-- Form -->
+          <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+              <span class="input-group-text"><i class="fa fa-user"></i></span>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="First Name"
+                name="first_name"
+              />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text"><i class="fa fa-user"></i></span>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Last Name"
+                name="last_name"
+              />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text"
+                ><i class="fa fa-envelope"></i
+              ></span>
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Email"
+                name="email"
+              />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text"><i class="fa fa-lock"></i></span>
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Password"
+                name="password"
+              />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text"><i class="fa fa-lock"></i></span>
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Confirm Password"
+                name="confirm_password"
+              />
+            </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-danger">Register</button>
+            </div>
+            <p class="text-center text-muted mt-2">
+              When you Register by Clicking Register button, You Agree to our
+              <a href="#">Terms & Conditions</a> and
+              <a href="#">Privacy Policy </a>
+            </p>
+            <p class="text-center text-muted mt-2">
+              Already Have account? <a href="login.html">Login Here</a>
+            </p>
+          </form>
+          {% for message in messages %}
+          <p>{{ message }}</p>
+          {% endfor %}
+          <!-- Form -->
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

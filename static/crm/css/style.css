@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+body,
+button {
+  font-family: "Inter", sans-serif;
+}
+:root {
+  --offcanvas-width: 270px;
+  --topNavbarHeight: 56px;
+}
+.sidebar-nav {
+  width: var(--offcanvas-width);
+}
+.sidebar-link {
+  display: flex;
+  align-items: center;
+}
+.sidebar-link .right-icon {
+  display: inline-flex;
+}
+.sidebar-link[aria-expanded="true"] .right-icon {
+  transform: rotate(180deg);
+}
+@media (min-width: 992px) {
+  body {
+    overflow: auto !important;
+  }
+  main {
+    margin-left: var(--offcanvas-width);
+  }
+  /* this is to remove the backdrop */
+  .offcanvas-backdrop::before {
+    display: none;
+  }
+  .sidebar-nav {
+    -webkit-transform: none;
+    transform: none;
+    visibility: visible !important;
+    height: calc(100% - var(--topNavbarHeight));
+    top: var(--topNavbarHeight);
+  }
+}
+
+/* add empolyee */
+.panel {
+  padding: 20px;
+  margin-top: 20px;
+  background: #f8f9fa;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.col-form-label {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.form-control {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 0;
+}
+
+.btn-container {
+  text-align: right;
+}
+
+/* Employee list */
+.sidebar-nav {
+  width: 250px;
+}
+@media (max-width: 767px) {
+  .sidebar-nav {
+    width: 100%;
+  }
+}
+
+
+/* Viewproject */
+.table thead th {
+    text-align: center;
+    vertical-align: middle;
+    background-color: #343a40; 
+    color: #fff; 
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px; 
+}
+/* Viewproject */
