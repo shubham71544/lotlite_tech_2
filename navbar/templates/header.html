@@ -14,18 +14,18 @@
      <div class="header-upper bg-white">
          <div class="container-fluid clearfix">
 
-             <div class="header-inner rel d-flex align-items-center">
-                 <div class="logo-outer">
-                     <div class="logo"><a href="/home"><img src="/static/images/logos/logo.png" alt="Logo" title="Logo" width="200" height="50"></a></div>
+             <div class="header-inner rel d-flex align-items-center" >
+                 <div class="logo-outer" style="background-color: #674df3;">
+                     <div class="logo"><a href="/home"><img src="/static/images/logos/logo.png" alt="Logo" title="Logo" width="200" height="110"></a></div>
                  </div>
 
                  <div class="nav-outer mx-auto clearfix">
                      <!-- Main Menu -->
                      <nav class="main-menu navbar-expand-lg">
-                         <div class="navbar-header py-10">
-                            <div class="mobile-logo">
+                         <div class="navbar-header py-10" style="background-color: #674df3;">
+                            <div class="mobile-logo" style="background-color: #674df3;" >
                                 <a href="/home">
-                                     <img src="/static/images/logos/logo.png" alt="Logo" title="Logo" width="200" height="50">
+                                     <img src="/static/images/logos/logo.png" alt="Logo" title="Logo" width="200" height="110">
                                 </a>
                             </div>
                             
@@ -39,33 +39,29 @@
 
                          <div class="navbar-collapse collapse clearfix">
                              <ul class="navigation clearfix">
-                                 <li class="dropdown"><a href="#">Home</a>
-                                     <ul>
-                                         <li><a href="/home">Home Page</a></li>
-                                      
-                                     </ul>
+                                 <li class=""><a href="/home">Home</a>
+                                     
                                  </li>
-                                 <li class="dropdown"><a href="#">services</a>
-                                     <ul>
-                                         
-                                         <li><a href="/services">Services</a></li>
-                                       
-                                     </ul>
+                                 <li class=""><a href="/about">About us</a>
+                                     
                                  </li>
-                                 <li class="dropdown"><a href="#">career</a>
-                                    <ul>
-                                        <li><a href="/career">career</a></li>
+                                 <li class=""><a href="/services">services</a>
+                                     
+                                 </li>
+                                 <li class=""><a href="/career">career</a>
+                                    {% comment %} <ul> {% endcomment %}
+                                        {% comment %} <li><a href="/career">career</a></li> {% endcomment %}
                                         {% comment %} <li><a href="project-masonry.html">Project Masonry.</a></li> {% endcomment %}
                                         {% comment %} <li><a href="project-details.html">Project Details</a></li> {% endcomment %}
-                                    </ul>
+                                    {% comment %} </ul> {% endcomment %}
                                 </li>
-                                <li class="dropdown"><a href="#">Courses</a>
-                                    <ul>
-                                        <li><a href="/courses">Courses</a></li>
+                                <li class=""><a href="/courses">Courses</a>
+                                    {% comment %} <ul> {% endcomment %}
+                                        {% comment %} <li><a href="/courses">Courses</a></li> {% endcomment %}
                                         {% comment %} <li><a href="product-details.html">Courses details</a></li> {% endcomment %}
                                         {% comment %} <li><a href="cart.html">cart page</a></li> {% endcomment %}
                                         {% comment %} <li><a href="checkout.html">checkout</a></li> {% endcomment %}
-                                    </ul>
+                                    {% comment %} </ul> {% endcomment %}
                                 </li>
                                 {% comment %} <li class="dropdown"><a href="#">blog</a>
                                     <ul>
@@ -73,10 +69,10 @@
                                         <li><a href="blog-details.html">blog details</a></li>
                                     </ul>
                                 </li> {% endcomment %}
-                                <li class="dropdown"><a href="#">More</a>
+                                <li class=""><a href="/contact">Contact us</a>
                                     <ul>
-                                        <li><a href="/about">About us</a></li>
-                                        <li><a href="/contact">Contact us</a></li>
+                                        
+                
                                         {% comment %} <li><a href="/team">Team</a></li> {% endcomment %}
                                         {% comment %} <li><a href="/faqs">faqs</a></li> {% endcomment %}
                                         {% comment %} <li><a href="/pricing">Pricing Plan</a></li> {% endcomment %}

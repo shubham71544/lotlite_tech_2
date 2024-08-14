@@ -192,6 +192,62 @@
     <script src="/static/js/bootstrap.min.js"></script>
     <!-- Custom script -->
     <script src="/static/js/script.js"></script>
+    <script>
+        document.getElementById('job-application-form').addEventListener('submit', function(event) {
+            // Prevent form submission
+            event.preventDefault();
+    
+            // Get form elements
+            var firstName = document.getElementById('first-name').value.trim();
+            var lastName = document.getElementById('last-name').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var mobilePhone = document.getElementById('mobile-phone').value.trim();
+            var experienceYears = document.getElementById('experience-years').value.trim();
+            var experienceMonths = document.getElementById('experience-months').value.trim();
+            var currentSalary = document.getElementById('current-salary').value.trim();
+            var expectedSalary = document.getElementById('expected-salary').value.trim();
+            var availableToJoin = document.getElementById('available-to-join').value.trim();
+            var resume = document.getElementById('resume').value;
+            var privacyPolicy = document.getElementById('privacy-policy').checked;
+    
+            // Validation checks
+            if (!firstName || !lastName || !email || !mobilePhone || !experienceYears || 
+                !experienceMonths || !currentSalary || !expectedSalary || !availableToJoin || 
+                !resume || !privacyPolicy) {
+                alert('Please fill in all the required fields.');
+                return;
+            }
+    
+            // Email format check
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+    
+            // Mobile phone format check (assuming 10 digits)
+            var phonePattern = /^\d{10}$/;
+            if (!phonePattern.test(mobilePhone)) {
+                alert('Please enter a valid 10-digit mobile phone number.');
+                return;
+            }
+    
+            // Ensure experience is not negative
+            if (parseInt(experienceYears) < 0 || parseInt(experienceMonths) < 0) {
+                alert('Experience cannot be negative.');
+                return;
+            }
+    
+            // Ensure salaries are not negative
+            if (parseInt(currentSalary) < 0 || parseInt(expectedSalary) < 0) {
+                alert('Salary cannot be negative.');
+                return;
+            }
+    
+            // If all checks pass, submit the form
+            this.submit();
+        });
+    </script>
 
 </body>
 </html>

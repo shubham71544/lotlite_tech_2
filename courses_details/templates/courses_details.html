@@ -177,22 +177,22 @@ body {
                 </div>
                 {% endif %}
 
-                <form id="contactForm" class="contactForm" action="/enroll_Data/" name="contactForm" method="post">
+                <form id="contactForm" class="contactForm" action="/enroll_Data/" name="contactForm" method="post" onsubmit="return validateForm()">
                     {% csrf_token %}
                     <div class="form-group">
                         <input type="text" id="name" name="name" class="form-control" value="" placeholder="Full name" required data-error="Please enter your name">
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <input type="text" id="phone_number" name="phone_number" class="form-control" value="" placeholder="Phone Number" required data-error="Please enter your Phone Number">
+                        <input type="text" id="phone_number" name="phone_number" class="form-control" value="" placeholder="Phone Number" pattern="^\d{10}$" required data-error="Please enter a valid 10-digit Phone Number">
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <input type="email" id="email" name="email" class="form-control" value="" placeholder="Email Address" required data-error="Please enter your Email">
+                        <input type="email" id="email" name="email" class="form-control" value="" placeholder="Email Address" required data-error="Please enter a valid Email">
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <input type="text" id="courses" name="courses" class="form-control" value="{{ course.title }}" placeholder="Subject" data-error="Please enter your Subject"  readonly>
+                        <input type="text" id="courses" name="courses" class="form-control" value="{{ course.title }}" placeholder="Subject" data-error="Please enter your Subject" readonly>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
@@ -200,10 +200,11 @@ body {
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group text-center mb-0">
-                        <button type="submit" class="theme-btn style-two">send message <i class="far fa-long-arrow-right"></i></button>
+                        <button type="submit" class="theme-btn style-two">Send Message <i class="far fa-long-arrow-right"></i></button>
                         <div id="msgSubmit" class="hidden"></div>
                     </div>
                 </form>
+                
             </div>
         </div>
     </div>
@@ -236,6 +237,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+    function validateForm() {
+        let valid = true;
+    
+        // Name validation
+        const name = document.getElementById("name").value;
+        if (name.trim() === "") {
+            alert("Name is required.");
+            valid = false;
+        }
+    
+        // Phone number validation (should be 10 digits)
+        const phone = document.getElementById("phone_number").value;
+        const phonePattern = /^\d{10}$/;
+        if (!phonePattern.test(phone)) {
+            alert("Please enter a valid 10-digit phone number.");
+            valid = false;
+        }
+    
+        // Email validation
+        const email = document.getElementById("email").value;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            alert("Please enter a valid email address.");
+            valid = false;
+        }
+    
+        // Message validation
+        const message = document.getElementById("message").value;
+        if (message.trim() === "") {
+            alert("Message is required.");
+            valid = false;
+        }
+    
+        return valid;
+    }
 
 </script>
 
